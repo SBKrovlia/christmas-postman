@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by Berdniky on 27.12.2014.
  */
 @Entity
+@Table
 public class Congratulation {
 
     @Id
