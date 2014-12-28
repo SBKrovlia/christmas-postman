@@ -24,11 +24,25 @@
                 <lable>Uplad picture jpg: </lable>
             </td>
             <td>
-                <input type="file" accept="image/*" name="uploadPicture">
+                <input type="file" accept="image/jpeg" name="uploadPicture">
             </td>
         </tr>
-        <tr></tr>
-        <tr></tr>
+        <tr>
+            <td>
+                <lable>Uplad audio mp3: </lable>
+            </td>
+            <td>
+                <input type="file" accept="audio/mp3" name="uploadAudio">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <lable>Uplad video mp4: </lable>
+            </td>
+            <td>
+                <input type="file" accept="video/mp4" name="uploadVideo">
+            </td>
+        </tr>
         <tr>
             <td>
                 <input type="Submit" value="Submit"/>

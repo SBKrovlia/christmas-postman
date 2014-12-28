@@ -44,17 +44,18 @@ public class MailServiceImpl implements MailService {
             helper.setTo(congratulation.getEmail());
             helper.setSubject(CONGRATULATION_SUBJECT);
             helper.setText(msg);
-            if(congratulation.getPictures()!= null) {
-                FileSystemResource filePicture = new FileSystemResource(congratulation.getPictures());
+            if(congratulation.getPicture()!= null) {
+                FileSystemResource filePicture = new FileSystemResource(congratulation.getPicture());
                 helper.addAttachment(filePicture.getFilename(), filePicture);
             }
-
-
-            /*FileSystemResource fileAudio = new FileSystemResource("D:\\123audio.mp3");
-            FileSystemResource fileVideo = new FileSystemResource("D:\\123video.mp4");
-
-            helper.addAttachment(fileAudio.getFilename(), fileAudio);
-            helper.addAttachment(fileVideo.getFilename(), fileVideo);*/
+            if(congratulation.getAudio()!= null) {
+                FileSystemResource fileAudio = new FileSystemResource(congratulation.getAudio());
+                helper.addAttachment(fileAudio.getFilename(), fileAudio);
+            }
+            if(congratulation.getVideo()!= null) {
+                FileSystemResource fileVideo = new FileSystemResource(congratulation.getVideo());
+                helper.addAttachment(fileVideo.getFilename(), fileVideo);
+            }
         }catch (MessagingException e) {
             throw new MailParseException(e);
         }

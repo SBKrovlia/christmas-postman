@@ -20,7 +20,7 @@ public class Congratulation {
     private String text;
 
     @Column
-    private String pictures;
+    private String picture;
 
     @Column
     private String audio;
@@ -53,12 +53,12 @@ public class Congratulation {
         this.text = text;
     }
 
-    public String getPictures() {
-        return pictures;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPictures(String pictures) {
-        this.pictures = pictures;
+    public void setPicture(String pictures) {
+        this.picture = pictures;
     }
 
     public String getAudio() {

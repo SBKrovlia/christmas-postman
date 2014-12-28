@@ -16,7 +16,7 @@ public class FileUploader  implements java.io.Serializable{
     private static final String DOT = ".";
 
     public String saveFile(String congratulationId, MultipartFile multipartFile, String fileExtension) {
-        final String fileName = congratulationId + DOT + fileExtension;
+        final String fileName = congratulationId + fileExtension + DOT + fileExtension;
         final String filePath = FOLDER + fileName;
 
         try {

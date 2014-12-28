@@ -35,14 +35,28 @@ public class CongratulationController {
     }
 
     @RequestMapping(value = "/saveCongratulation",  method = RequestMethod.POST)
-    public String saveCongratulation(@ModelAttribute("congratulation") Congratulation congratulation, @RequestParam(value = "uploadPicture", required = false) MultipartFile picture) {
+    public String saveCongratulation(@ModelAttribute("congratulation") Congratulation congratulation,
+                                     @RequestParam(value = "uploadPicture", required = false) MultipartFile picture,
+                                     @RequestParam(value = "uploadAudio", required = false) MultipartFile audio,
+                                     @RequestParam(value = "uploadVideo", required = false) MultipartFile video) {
         congratulationService.create(congratulation);
         final String congratulationId = ((Long)congratulation.getId()).toString();
-        if (!picture.isEmpty()) {
-            String congratulationsPicturePath = fileUploader.saveFile(congratulationId, picture, "jpg");
-            congratulation.setPictures(congratulationsPicturePath);
+        if((!picture.isEmpty()) || (!audio.isEmpty()) || (!video.isEmpty())) {
+            if (!picture.isEmpty()) {
+                String congratulationsPicturePath = fileUploader.saveFile(congratulationId, picture, "jpg");
+                congratulation.setPicture(congratulationsPicturePath);
+            }
+            if (!audio.isEmpty()) {
+                String congratulationsAudioPath = fileUploader.saveFile(congratulationId, audio, "mp3");
+                congratulation.setAudio(congratulationsAudioPath);
+            }
+            if (!video.isEmpty()) {
+                String congratulationsVideoPath = fileUploader.saveFile(congratulationId, video, "mp4");
+                congratulation.setVideo(congratulationsVideoPath);
+            }
+            congratulationService.update(congratulation);
         }
-        congratulationService.update(congratulation);
+
         mailService.sendCongratulationMail(congratulation);
 
         return "redirect:/";
