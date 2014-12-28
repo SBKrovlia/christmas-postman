@@ -1,7 +1,7 @@
 <html>
 <#import "spring.ftl" as spring/>
 <body>
-<form name="congrutulationForm" action="/saveCongratulation" method="post">
+<form action="/saveCongratulation" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>
@@ -19,15 +19,14 @@
             <@spring.formInput  "congratulation.text" />
             </td>
         </tr>
-        <#--<tr>
+        <tr>
             <td>
                 <lable>Uplad picture jpg: </lable>
             </td>
             <td>
-                <input type="file" accept="image/*"  &lt;#&ndash;onchange="showMyImage(this)"&ndash;&gt;
-                       name="uploadPhoto" id="uploadPhoto" class="upload">
+                <input type="file" accept="image/*" name="uploadPicture">
             </td>
-        </tr>-->
+        </tr>
         <tr></tr>
         <tr></tr>
         <tr>

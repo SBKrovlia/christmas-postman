@@ -37,6 +37,8 @@
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.0.1.Final" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Maven: com.fasterxml:classmate:0.8.0" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:1.3.2" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="christmas-postman/web/Web" />

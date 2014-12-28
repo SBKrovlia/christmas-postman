@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
         >
 
-    <context:component-scan base-package="com.gmail.berdnik.stanislav" />
+    <context:component-scan base-package="com.gmail.berdnik.stanislav"/>
 
 
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -25,10 +25,10 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/congratulation" />
-        <property name="username" value="appBase" />
-        <property name="password" value="1111" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/congratulation"/>
+        <property name="username" value="appBase"/>
+        <property name="password" value="1111"/>
     </bean>
 
     <!--Data hibernate session factory config-->
@@ -40,7 +40,9 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+                <prop key="hibernate.current_session_context_class">
+                    org.springframework.orm.hibernate4.SpringSessionContext
+                </prop>
             </props>
         </property>
     </bean>
@@ -56,10 +58,10 @@
 
     <!--Java Mail Sender-->
     <bean id="congratulationMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com" />
-        <property name="port" value="465" />
-        <property name="username" value="stanislav.berdnik@gmail.com" />
-        <property name="password" value="b2r2b2wk2" />
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="465"/>
+        <property name="username" value="stanislav.berdnik@gmail.com"/>
+        <property name="password" value="b2r2b2wk2"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
@@ -71,8 +73,7 @@
         </property>
     </bean>
 
-
-
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 
 </beans>

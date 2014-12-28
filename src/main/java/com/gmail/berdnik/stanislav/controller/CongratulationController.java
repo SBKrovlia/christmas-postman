@@ -3,11 +3,14 @@ package com.gmail.berdnik.stanislav.controller;
 import com.gmail.berdnik.stanislav.model.Congratulation;
 import com.gmail.berdnik.stanislav.service.CongratulationService;
 import com.gmail.berdnik.stanislav.service.MailService;
+import com.gmail.berdnik.stanislav.utils.FileUploader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,6 +24,8 @@ public class CongratulationController {
     CongratulationService congratulationService;
     @Autowired
     MailService mailService;
+    @Autowired
+    FileUploader fileUploader;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getCongratulationPage() {
@@ -29,10 +34,17 @@ public class CongratulationController {
         return mav;
     }
 
-    @RequestMapping(value = "/saveCongratulation", method = RequestMethod.POST)
-    public String saveCongratulation (@ModelAttribute("congratulation") Congratulation congratulation) {
+    @RequestMapping(value = "/saveCongratulation",  method = RequestMethod.POST)
+    public String saveCongratulation(@ModelAttribute("congratulation") Congratulation congratulation, @RequestParam(value = "uploadPicture", required = false) MultipartFile picture) {
         congratulationService.create(congratulation);
+        final String congratulationId = ((Long)congratulation.getId()).toString();
+        if (!picture.isEmpty()) {
+            String congratulationsPicturePath = fileUploader.saveFile(congratulationId, picture, "jpg");
+            congratulation.setPictures(congratulationsPicturePath);
+        }
+        congratulationService.update(congratulation);
         mailService.sendCongratulationMail(congratulation);
+
         return "redirect:/";
     }
 }

@@ -1,7 +1,5 @@
 package com.gmail.berdnik.stanislav.model;
 
-import org.hibernate.validator.constraints.Email;
-
 import javax.persistence.*;
 
 /**
@@ -16,11 +14,20 @@ public class Congratulation {
     private long id;
 
     @Column
-    @Email
     private String email;
 
     @Column
     private String text;
+
+    @Column
+    private String pictures;
+
+    @Column
+    private String audio;
+
+    @Column
+    private String video;
+
 
     public long getId() {
         return id;
@@ -44,5 +51,29 @@ public class Congratulation {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(String pictures) {
+        this.pictures = pictures;
+    }
+
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 }

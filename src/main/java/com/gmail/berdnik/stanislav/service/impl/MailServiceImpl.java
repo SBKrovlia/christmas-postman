@@ -7,6 +7,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailParseException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -35,19 +36,23 @@ public class MailServiceImpl implements MailService {
     private JavaMailSender mailSender;
 
     @Async
-    public void sendMail(String from, String to, String subject, String msg) {
+    public void sendMail(Congratulation congratulation, String msg) {
         MimeMessage message = mailSender.createMimeMessage();
         try{
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(from);
-            helper.setTo(to);
-            helper.setSubject(subject);
+            helper.setFrom(SENDER_MAIL);
+            helper.setTo(congratulation.getEmail());
+            helper.setSubject(CONGRATULATION_SUBJECT);
             helper.setText(msg);
+            if(congratulation.getPictures()!= null) {
+                FileSystemResource filePicture = new FileSystemResource(congratulation.getPictures());
+                helper.addAttachment(filePicture.getFilename(), filePicture);
+            }
 
-            /*FileSystemResource filePicture = new FileSystemResource("D:\\123picture.jpg");
-            FileSystemResource fileAudio = new FileSystemResource("D:\\123audio.mp3");
+
+            /*FileSystemResource fileAudio = new FileSystemResource("D:\\123audio.mp3");
             FileSystemResource fileVideo = new FileSystemResource("D:\\123video.mp4");
-            helper.addAttachment(filePicture.getFilename(), filePicture);
+
             helper.addAttachment(fileAudio.getFilename(), fileAudio);
             helper.addAttachment(fileVideo.getFilename(), fileVideo);*/
         }catch (MessagingException e) {
@@ -73,7 +78,7 @@ public class MailServiceImpl implements MailService {
             final Map<String, Object> templateMap = new HashMap<String, Object>();
             templateMap.put("congratulation", congratulation.getText());
             emailTemplate.process(templateMap, writer);
-            sendMail(SENDER_MAIL, congratulation.getEmail(), CONGRATULATION_SUBJECT, writer.toString());
+            sendMail(congratulation, writer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
