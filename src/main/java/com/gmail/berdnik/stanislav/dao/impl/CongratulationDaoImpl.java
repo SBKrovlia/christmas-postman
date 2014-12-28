@@ -26,4 +26,9 @@ public class CongratulationDaoImpl implements CongratulationDao {
         getCurrentSession().save(congratulation);
         return congratulation;
     }
+
+    @Override
+    public void update(Congratulation congratulation) {
+        getCurrentSession().update(congratulation);
+    }
 }

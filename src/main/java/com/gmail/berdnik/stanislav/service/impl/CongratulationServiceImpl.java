@@ -21,4 +21,9 @@ public class CongratulationServiceImpl implements CongratulationService {
     public Congratulation create(final Congratulation congratulation) {
         return congratulationDao.create(congratulation);
     }
+
+    @Override
+    public void update(final Congratulation congratulation) {
+        congratulationDao.update(congratulation);
+    }
 }
