@@ -19,6 +19,17 @@
             <@spring.formInput  "congratulation.text" />
             </td>
         </tr>
+        <#--<tr>
+            <td>
+                <lable>Uplad picture jpg: </lable>
+            </td>
+            <td>
+                <input type="file" accept="image/*"  &lt;#&ndash;onchange="showMyImage(this)"&ndash;&gt;
+                       name="uploadPhoto" id="uploadPhoto" class="upload">
+            </td>
+        </tr>-->
+        <tr></tr>
+        <tr></tr>
         <tr>
             <td>
                 <input type="Submit" value="Submit"/>

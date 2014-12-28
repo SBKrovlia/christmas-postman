@@ -1,5 +1,7 @@
 package com.gmail.berdnik.stanislav.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 
 /**
@@ -14,6 +16,7 @@ public class Congratulation {
     private long id;
 
     @Column
+    @Email
     private String email;
 
     @Column

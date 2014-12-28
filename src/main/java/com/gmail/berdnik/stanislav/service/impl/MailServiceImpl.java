@@ -7,11 +7,15 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.MailSender;
+import org.springframework.mail.MailParseException;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -28,20 +32,29 @@ public class MailServiceImpl implements MailService {
 
     @Autowired
     @Qualifier("congratulationMailSender")
-    private MailSender mailSender;
-
-    public void setMailSender(MailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    private JavaMailSender mailSender;
 
     @Async
     public void sendMail(String from, String to, String subject, String msg) {
-        final SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(msg);
+        MimeMessage message = mailSender.createMimeMessage();
+        try{
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(msg);
+
+            /*FileSystemResource filePicture = new FileSystemResource("D:\\123picture.jpg");
+            FileSystemResource fileAudio = new FileSystemResource("D:\\123audio.mp3");
+            FileSystemResource fileVideo = new FileSystemResource("D:\\123video.mp4");
+            helper.addAttachment(filePicture.getFilename(), filePicture);
+            helper.addAttachment(fileAudio.getFilename(), fileAudio);
+            helper.addAttachment(fileVideo.getFilename(), fileVideo);*/
+        }catch (MessagingException e) {
+            throw new MailParseException(e);
+        }
         mailSender.send(message);
+
     }
 
     @Async
