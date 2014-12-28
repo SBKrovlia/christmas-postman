@@ -32,6 +32,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="christmas-postman/web/Web" />

@@ -2,6 +2,7 @@ package com.gmail.berdnik.stanislav.controller;
 
 import com.gmail.berdnik.stanislav.model.Congratulation;
 import com.gmail.berdnik.stanislav.service.CongratulationService;
+import com.gmail.berdnik.stanislav.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,8 @@ public class CongratulationController {
 
     @Autowired
     CongratulationService congratulationService;
+    @Autowired
+    MailService mailService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getCongratulationPage() {
@@ -29,6 +32,7 @@ public class CongratulationController {
     @RequestMapping(value = "/saveCongratulation", method = RequestMethod.POST)
     public String saveCongratulation (@ModelAttribute("congratulation") Congratulation congratulation) {
         congratulationService.create(congratulation);
+        mailService.sendCongratulationMail(congratulation);
         return "redirect:/";
     }
 }
