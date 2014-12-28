@@ -8,5 +8,7 @@ import com.gmail.berdnik.stanislav.model.Congratulation;
 public interface CongratulationDao {
     Congratulation create(Congratulation congratulation);
     void update (Congratulation congratulation);
+    Congratulation getById (long id);
+    void delete(Congratulation congratulation);
 
 }

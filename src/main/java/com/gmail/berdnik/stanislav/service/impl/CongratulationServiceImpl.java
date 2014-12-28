@@ -26,4 +26,14 @@ public class CongratulationServiceImpl implements CongratulationService {
     public void update(final Congratulation congratulation) {
         congratulationDao.update(congratulation);
     }
+
+    @Override
+    public Congratulation getById(long id) {
+        return congratulationDao.getById(id);
+    }
+
+    @Override
+    public void delete(Congratulation congratulation) {
+        congratulationDao.delete(congratulation);
+    }
 }

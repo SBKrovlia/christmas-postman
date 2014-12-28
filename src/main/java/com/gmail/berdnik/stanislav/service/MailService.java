@@ -8,5 +8,4 @@ import com.gmail.berdnik.stanislav.model.Congratulation;
 public interface MailService {
 
     void sendCongratulationMail(Congratulation congratulation);
-
 }

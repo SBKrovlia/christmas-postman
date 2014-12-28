@@ -2,7 +2,7 @@ package com.gmail.berdnik.stanislav.controller;
 
 import com.gmail.berdnik.stanislav.model.Congratulation;
 import com.gmail.berdnik.stanislav.service.CongratulationService;
-import com.gmail.berdnik.stanislav.service.MailService;
+import com.gmail.berdnik.stanislav.utils.CongratulationQueue;
 import com.gmail.berdnik.stanislav.utils.FileUploader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class CongratulationController {
     @Autowired
     CongratulationService congratulationService;
     @Autowired
-    MailService mailService;
+    CongratulationQueue congratulationQueue;
     @Autowired
     FileUploader fileUploader;
 
@@ -38,7 +38,7 @@ public class CongratulationController {
     public String saveCongratulation(@ModelAttribute("congratulation") Congratulation congratulation,
                                      @RequestParam(value = "uploadPicture", required = false) MultipartFile picture,
                                      @RequestParam(value = "uploadAudio", required = false) MultipartFile audio,
-                                     @RequestParam(value = "uploadVideo", required = false) MultipartFile video) {
+                                     @RequestParam(value = "uploadVideo", required = false) MultipartFile video) throws InterruptedException {
         congratulationService.create(congratulation);
         final String congratulationId = ((Long)congratulation.getId()).toString();
         if((!picture.isEmpty()) || (!audio.isEmpty()) || (!video.isEmpty())) {
@@ -56,8 +56,7 @@ public class CongratulationController {
             }
             congratulationService.update(congratulation);
         }
-
-        mailService.sendCongratulationMail(congratulation);
+        congratulationQueue.addCongratulationId(congratulation.getId());
 
         return "redirect:/";
     }

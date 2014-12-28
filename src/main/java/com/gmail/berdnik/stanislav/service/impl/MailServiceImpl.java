@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -26,6 +27,7 @@ import java.util.Map;
  * Created by Berdniky on 28.12.2014.
  */
 @Service("mailService")
+@Transactional
 public class MailServiceImpl implements MailService {
 
     private static final String SENDER_MAIL = "stanislav.berdnik@gmail.com";

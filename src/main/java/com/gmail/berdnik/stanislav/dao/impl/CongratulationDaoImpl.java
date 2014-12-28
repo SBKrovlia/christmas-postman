@@ -31,4 +31,14 @@ public class CongratulationDaoImpl implements CongratulationDao {
     public void update(Congratulation congratulation) {
         getCurrentSession().update(congratulation);
     }
+
+    @Override
+    public Congratulation getById(long id) {
+         return (Congratulation)getCurrentSession().get(Congratulation.class,id);
+    }
+
+    @Override
+    public void delete(Congratulation congratulation) {
+        getCurrentSession().delete(congratulation);
+    }
 }

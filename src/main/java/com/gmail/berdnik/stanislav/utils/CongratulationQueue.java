@@ -1,10 +1,13 @@
 package com.gmail.berdnik.stanislav.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Berdniky on 28.12.2014.
  */
+@Component
 public class CongratulationQueue {
     private LinkedBlockingQueue<Long> congratIdQueue = new LinkedBlockingQueue<Long>();
 
@@ -14,5 +17,9 @@ public class CongratulationQueue {
 
     public long getCongratulationId() throws InterruptedException {
         return congratIdQueue.take();
+    }
+
+    public boolean isEmpty() {
+        return congratIdQueue.isEmpty();
     }
 }
