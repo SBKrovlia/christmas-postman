@@ -57,7 +57,6 @@ public class CongratulationController {
             congratulationService.update(congratulation);
         }
         congratulationQueue.addCongratulationId(congratulation.getId());
-
         return "redirect:/";
     }
 }

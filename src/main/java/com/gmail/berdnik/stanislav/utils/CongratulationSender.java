@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-
 /**
  * Created by Berdniky on 28.12.2014.
  */
@@ -29,19 +27,21 @@ public class CongratulationSender {
             long id = congratulationQueue.getCongratulationId();
             Congratulation congrat = congratulationService.getById(id);
             mailService.sendCongratulationMail(congrat);
-            if (congrat.getPicture() != null) {
-                final File file = new File(congrat.getPicture());
-                if (file.exists()) file.delete();
-            }
-            if (congrat.getAudio() != null) {
-                final File file = new File(congrat.getAudio());
-                if (file.exists()) file.delete();
-            }
-            if(congrat.getVideo() != null) {
-                final File file = new File(congrat.getVideo());
-                if (file.exists()) file.delete();
-            }
-            congratulationService.delete(congrat);
+//            if (congrat.getPicture() != null) {
+//                final File file = new File(congrat.getPicture());
+//                if (file.exists()) file.delete();
+//            }
+//            if (congrat.getAudio() != null) {
+//                final File file = new File(congrat.getAudio());
+//                if (file.exists()) file.delete();
+//            }
+//            if(congrat.getVideo() != null) {
+//                final File file = new File(congrat.getVideo());
+//                if (file.exists()) file.delete();
+//            }
+//            congratulationService.delete(congrat);
+            System.out.println(id);
+            System.out.println(congrat);
         }
     }
 }

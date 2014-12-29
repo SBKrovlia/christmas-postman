@@ -28,7 +28,6 @@ public class Congratulation {
     @Column
     private String video;
 
-
     public long getId() {
         return id;
     }
