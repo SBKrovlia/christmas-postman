@@ -28,7 +28,7 @@ import java.util.Map;
 @Service("mailService")
 public class MailServiceImpl implements MailService {
 
-    private static final String SENDER_MAIL = "stanislav.berdnik@gmail.com";
+    private static final String SENDER_MAIL = "christmas.postman.app@gmail.com";
     private static final String CONGRATULATION_SUBJECT = "HAPPY NEW YEAR!";
 
     @Autowired

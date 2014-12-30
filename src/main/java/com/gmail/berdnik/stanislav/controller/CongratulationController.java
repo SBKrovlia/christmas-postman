@@ -34,7 +34,7 @@ public class CongratulationController {
         return mav;
     }
 
-    @RequestMapping(value = "/saveCongratulation",  method = RequestMethod.POST)
+    @RequestMapping(value = "/saveCongratulation", method = RequestMethod.POST)
     public String saveCongratulation(@ModelAttribute("congratulation") Congratulation congratulation,
                                      @RequestParam(value = "uploadPicture", required = false) MultipartFile picture,
                                      @RequestParam(value = "uploadAudio", required = false) MultipartFile audio,

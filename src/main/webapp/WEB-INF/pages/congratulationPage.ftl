@@ -1,7 +1,7 @@
 <html>
 <#import "spring.ftl" as spring/>
 <body>
-<form action="/saveCongratulation" method="post" enctype="multipart/form-data">
+<form action="<@spring.url "/saveCongratulation" />" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>

@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 @Component
 public class FileUploader  implements java.io.Serializable{
-    private static final String FOLDER = "D:\\congratulation\\";
+    private static final String FOLDER = "/var/log/congratulation/";
     private static final String DOT = ".";
 
     public String saveFile(String congratulationId, MultipartFile multipartFile, String fileExtension) {

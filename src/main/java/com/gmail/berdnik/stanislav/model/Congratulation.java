@@ -1,13 +1,14 @@
 package com.gmail.berdnik.stanislav.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Berdniky on 27.12.2014.
  */
 @Entity
-@Table
-public class Congratulation {
+@Table(name = "congratulation")
+public class Congratulation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

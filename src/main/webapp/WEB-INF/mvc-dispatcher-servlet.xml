@@ -64,8 +64,8 @@
     <bean id="congratulationMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
         <property name="port" value="465"/>
-        <property name="username" value="stanislav.berdnik@gmail.com"/>
-        <property name="password" value="b2r2b2wk2"/>
+        <property name="username" value="christmas.postman.app@gmail.com"/>
+        <property name="password" value="CHr1stm2s"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
