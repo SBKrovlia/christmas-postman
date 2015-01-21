@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 
 /**
+ * Application throw
+ *
  * Created by Berdniky on 27.12.2014.
  */
 @Controller
@@ -40,7 +42,9 @@ public class CongratulationController {
     public String saveCongratulation(@ModelAttribute("congratulation") Congratulation congratulation,
                                      @RequestParam(value = "uploadPicture", required = false) MultipartFile picture,
                                      @RequestParam(value = "uploadAudio", required = false) MultipartFile audio,
-                                     @RequestParam(value = "uploadVideo", required = false) MultipartFile video) throws InterruptedException, IOException {
+                                     @RequestParam(value = "uploadVideo", required = false) MultipartFile video)
+            //The application throws an exception, in the future they can be displayed in the application logs
+            throws InterruptedException, IOException {
         congratulationService.create(congratulation);
         final String congratulationId = ((Long)congratulation.getId()).toString();
         //todo: make dynamic addition attach files

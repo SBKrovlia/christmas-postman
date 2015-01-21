@@ -27,6 +27,7 @@ public class CongratulationSender {
     CongratulationService congratulationService;
 
     @Scheduled(fixedDelay = JOB_DELAY)
+    //The application throws an exception, in the future they can be displayed in the application logs
     public void congratulationSend() throws InterruptedException, IOException, TemplateException {
         while (!congratulationQueue.isEmpty()) {
             long id = congratulationQueue.getCongratulationId();
