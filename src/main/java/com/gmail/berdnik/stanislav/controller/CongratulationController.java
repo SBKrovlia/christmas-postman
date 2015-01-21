@@ -43,7 +43,8 @@ public class CongratulationController {
                                      @RequestParam(value = "uploadVideo", required = false) MultipartFile video) throws InterruptedException, IOException {
         congratulationService.create(congratulation);
         final String congratulationId = ((Long)congratulation.getId()).toString();
-        if((!picture.isEmpty()) || (!audio.isEmpty()) || (!video.isEmpty())) {    //todo: make dynamic addition attach files
+        //todo: make dynamic addition attach files
+        if((!picture.isEmpty()) || (!audio.isEmpty()) || (!video.isEmpty())) {
             if (!picture.isEmpty()) {
                 String congratulationsPicturePath = fileUploader.saveFile(congratulationId, picture, "jpg");
                 congratulation.setPicture(congratulationsPicturePath);

@@ -47,7 +47,8 @@ public class MailServiceImpl implements MailService {
             helper.setTo(congratulation.getEmail());
             helper.setSubject(CONGRATULATION_SUBJECT);
             helper.setText(msg);
-            if(congratulation.getPicture()!= null) {                 //todo: get rid of hardcoding
+            //todo: get rid of hardcoding
+            if(congratulation.getPicture()!= null) {
                 FileSystemResource filePicture = new FileSystemResource(congratulation.getPicture());
                 helper.addAttachment(filePicture.getFilename(), filePicture);
             }
@@ -63,7 +64,6 @@ public class MailServiceImpl implements MailService {
             throw new MailParseException(e);
         }
         mailSender.send(message);
-
     }
 
     @Async

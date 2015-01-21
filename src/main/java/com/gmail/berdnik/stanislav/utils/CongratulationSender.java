@@ -32,7 +32,7 @@ public class CongratulationSender {
             long id = congratulationQueue.getCongratulationId();
             Congratulation congrat = congratulationService.getById(id);
             mailService.sendCongratulationMail(congrat);
-//todo: make deleting files
+   //todo: make deleting files
 //            if (congrat.getPicture() != null) {
 //                final File file = new File(congrat.getPicture());
 //                if (file.exists()) file.delete();

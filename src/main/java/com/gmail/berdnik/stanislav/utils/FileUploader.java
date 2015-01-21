@@ -14,7 +14,8 @@ import java.io.IOException;
  */
 @Component
 public class FileUploader  implements java.io.Serializable{
-    private static final String FOLDER = "D:\\var";  //todo: get rid of hardcoding
+    //todo: get rid of hardcoding
+    private static final String FOLDER = "D:\\var";
     private static final String DOT = ".";
 
     public String saveFile(String congratulationId, MultipartFile multipartFile, String fileExtension) throws IOException {
