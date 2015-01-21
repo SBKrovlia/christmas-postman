@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailParseException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -23,6 +22,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Service for sending mails
+ *
+ * Build message, attaches into message required elements and sends it
+ *
  * Created by Berdniky on 28.12.2014.
  */
 @Service("mailService")
@@ -36,7 +39,7 @@ public class MailServiceImpl implements MailService {
     private JavaMailSender mailSender;
 
     @Async
-    public void sendMail(Congratulation congratulation, String msg) {
+    public void sendMail(Congratulation congratulation, String msg) throws MailParseException {
         MimeMessage message = mailSender.createMimeMessage();
         try{
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -44,7 +47,7 @@ public class MailServiceImpl implements MailService {
             helper.setTo(congratulation.getEmail());
             helper.setSubject(CONGRATULATION_SUBJECT);
             helper.setText(msg);
-            if(congratulation.getPicture()!= null) {
+            if(congratulation.getPicture()!= null) {                 //todo: get rid of hardcoding
                 FileSystemResource filePicture = new FileSystemResource(congratulation.getPicture());
                 helper.addAttachment(filePicture.getFilename(), filePicture);
             }
@@ -64,27 +67,14 @@ public class MailServiceImpl implements MailService {
     }
 
     @Async
-    public void sendMail(SimpleMailMessage msg) {
-        mailSender.send(msg);
-    }
-
-    @Async
-    public void sendCongratulationMail(Congratulation congratulation) {
+    public void sendCongratulationMail(Congratulation congratulation) throws IOException, TemplateException {
         final Configuration config = new Configuration();
         config.setClassForTemplateLoading(MailServiceImpl.class, "/");
-        try {
-            Template emailTemplate;
-            emailTemplate = config.getTemplate("templates/congratulationMail.ftl");
+            Template emailTemplate = config.getTemplate("templates/congratulationMail.ftl");
             final StringWriter writer = new StringWriter();
             final Map<String, Object> templateMap = new HashMap<String, Object>();
             templateMap.put("congratulation", congratulation.getText());
             emailTemplate.process(templateMap, writer);
             sendMail(congratulation, writer.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-
     }
 }
