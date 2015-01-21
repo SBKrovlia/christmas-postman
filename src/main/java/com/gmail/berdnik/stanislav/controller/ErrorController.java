@@ -40,6 +40,15 @@ public class ErrorController {
         return mnv;
     }
 
+    @RequestMapping("error400")
+    public ModelAndView redirectToErrorPage400(final HttpServletRequest request){
+        final ModelAndView mnv = new ModelAndView(ERROR_PAGE);
+        mnv.addObject(ERROR_TTL, "400 Error: Bad request");
+        mnv.addObject(ERROR_MSG, "Fill in the fields correctly");
+        mnv.addObject(ERROR_CAS, getFullMessage(request));
+        return mnv;
+    }
+
     private String getFullMessage(final HttpServletRequest request) {
         final Integer statusCode = (Integer) request.getAttribute(
                 STRING_JAVAX + STRING_DOT_SERVLET + ".error.status_code");
